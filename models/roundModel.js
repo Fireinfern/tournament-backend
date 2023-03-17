@@ -3,12 +3,7 @@ const Player = require("./playerModel");
 
 const Round = Schema({
     players: {
-        type: [Player],
-        validate: {
-            validator: () => {
-                return this.players.length <= 2;
-            }
-        }
+        type: [Player]
     },
     winners: {
         type: [Player],

@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+const { Schema, default: mongoose } = require("mongoose");
 const Player = require("./playerModel");
 const Round = require("./roundModel");
 
@@ -20,10 +20,17 @@ const Tournament = Schema({
     rounds:{
         type: [Round],
         default: () => {
-            if (this.maxPlayerAmount == 16) return 4;
-            return 3;
+            let numberOfRounds = this.maxPlayerAmount == 16 ? 4 : 3;
+            let array = [];
+            for (let i = 0; i < numberOfRounds; i++) {
+                array.push({});
+            }
+            return array;
         }
-    },
+    }
+},
+{
+    collection: "tournament"
 });
 
-module.exports = Tournament;
+module.exports.Tournament = mongoose.model('tournament', Tournament);

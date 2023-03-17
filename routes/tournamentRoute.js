@@ -1,3 +1,6 @@
+const { createTournament } = require("../controllers/tournamentController");
+const Tournament = require("../models/tournamentModel");
+
 let router = require("express").Router();
 
 // add Auth if needed
@@ -5,8 +8,8 @@ router.get('', (req, res, next) => {
     res.send("Return all tournaments");
 })
 
-router.post('/add', (req, res, next) => {
-    res.send("Post Sended");
+router.post('/add', [createTournament],async (req, res, next) => {
+    res.send('Created a new Tournament');
 });
 
 router.get('/:id', (req, res, next) => {
@@ -19,6 +22,10 @@ router.delete('/:id', (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
     res.send("Putted in here");
+});
+
+router.get('/:id/round/:round', (req, res, next) => {
+
 });
 
 module.exports = router;
