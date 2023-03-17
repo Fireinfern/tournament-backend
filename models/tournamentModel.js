@@ -19,14 +19,17 @@ const Tournament = Schema({
     },
     rounds:{
         type: [Round],
-        default: () => {
+        default: function() {
             let numberOfRounds = this.maxPlayerAmount == 16 ? 4 : 3;
+            console.log(this);
+            console.log(numberOfRounds);
             let array = [];
             for (let i = 0; i < numberOfRounds; i++) {
+                console.log(i);
                 array.push({});
             }
             return array;
-        }
+        },
     }
 },
 {
