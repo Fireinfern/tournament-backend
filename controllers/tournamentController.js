@@ -4,6 +4,7 @@ module.exports.createTournament = async (req, res, next) => {
     let body = req.body;
     let newTournament = new Tournament(body);
     await newTournament.save();
+    res.locals.tournament = newTournament;
     return next();
 }
 

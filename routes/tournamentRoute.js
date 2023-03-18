@@ -9,7 +9,7 @@ router.get('', (req, res, next) => {
 })
 
 router.post('/add', [createTournament],async (req, res, next) => {
-    res.send('Created a new Tournament');
+    res.json(res.locals.tournament);
 });
 
 router.get('/:id', (req, res, next) => {
