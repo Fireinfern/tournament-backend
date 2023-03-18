@@ -32,3 +32,27 @@ DB="<Database URI>"
 Just replace the `<Name of the Property>` for the required field
 
 > :warning: **Update this file if more things are needed in the .env file**
+
+
+# Basic Design
+
+## Tournament System
+
+Construct an Web App that displays tournaments on a grid. Each tournament must have fixed number of players, this will be either 16 or 8.
+
+The tournament will have a number of rounds depending of the number of players. For 16 it will be 4 rounds, and for 8, 3.
+
+## Front End
+
+The fron end must have 3 basic pages in the nav bar:
+* Home -> This will work as a basic landing page
+* Login -> For Auth
+* Tournaments -> Displays the tournaments
+
+Then we need secondary pages like:
+* Add Tournament
+* Edit Tournament
+* Confirmation for deletion
+* Edit Rounds
+* Create Player
+* Select Winners
