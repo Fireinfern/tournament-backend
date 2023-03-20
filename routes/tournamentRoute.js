@@ -24,8 +24,17 @@ router.put('/:id', (req, res, next) => {
     res.send("Putted in here");
 });
 
-router.get('/:id/round/:round', (req, res, next) => {
-
+//get all rounds of a tournament
+router.get('/:id/round', [getAllRoundsByTournamentId],async (req, res, next) => {
+    res.json(res.locals.tournament);
 });
+
+//get one round of a tournament by Id
+router.get('/:id/round/:round', [getOneRoundFromTournamentById],async (req, res, next) => {
+    res.json(res.locals.round);
+});
+
+
+
 
 module.exports = router;
