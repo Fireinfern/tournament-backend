@@ -24,7 +24,7 @@ module.exports.getTournamentById = async (req, res, next) => {
 
 module.exports.updateTournamentById = async (req, res, next) => {
     let id = req.params.id;
-    await Tournament.findByIdAndUpdate(id, req.body);
+    res.locals.tournament = await Tournament.findByIdAndUpdate(id, req.body);
     return next();
 }
 
@@ -69,9 +69,9 @@ module.exports.deleteRoundById = async (req, res, next) => {
     let tournamentId = req.params.id;
     let roundId = req.params.round;
 
-    let tournament = await Tournament.findById(id);
+    let tournament = await Tournament.findById(tournamentId);
     tournament.rounds.remove(roundId);
-
+    await tournament.save();
     return next();
 }
 
@@ -81,8 +81,9 @@ module.exports.createTournamentRound = async (req, res, next) => {
     let body = req.body;
     //let newRound = new Round(body);
     let tournament = await Tournament.findById(id);
-    tournament.rounds.create(body);
+    let round = tournament.rounds.create(body);
+    tournament.rounds.push(round);
     await tournament.save();
-    
+    res.locals.tournament = tournament;
     return next();
 }
