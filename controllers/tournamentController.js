@@ -52,11 +52,20 @@ module.exports.getOneRoundFromTournamentById = async (req, res, next) => {
 }
 
 module.exports.updateRoundById = async (req, res, next) => {
+    let tournamentId = req.params.id;
+    let roundId = req.params.round;
+    let body = req.body;
 
+    let tournament = await Tournament.findOneAndUpdate(
+        { _id: tournamentId, 'rounds._id': roundId }, //search keys
+        { $set: { 'rounds.$': body } }
+    );
+        
+    return next();
 }
 
 module.exports.deleteRoundById = async (req, res, next) => {
-    
+
 }
 
 
