@@ -1,4 +1,4 @@
-const { createTournament } = require("../controllers/tournamentController");
+const { createTournament, deleteRoundById } = require("../controllers/tournamentController");
 const Tournament = require("../models/tournamentModel");
 
 let router = require("express").Router();
@@ -34,7 +34,10 @@ router.get('/:id/round/:round', [getOneRoundFromTournamentById],async (req, res,
     res.json(res.locals.round);
 });
 
-
+//delete a round in a tournament by Id
+router.delete('/:id/round/:round', [deleteRoundById], async (req, res, next) => {
+    res.send("Delete a specific round");
+});
 
 
 module.exports = router;
