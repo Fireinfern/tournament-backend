@@ -14,11 +14,11 @@ router.post('/add', [createTournament],async (req, res, next) => {
 });
 
 router.get('/:id', [getTournamentById],async (req, res, next) => {
-    res.json("Find a tournament with an ID");
+    res.json(res.locals.tournament);
 });
 
 router.delete('/:id', [deleteTournamentById],async(req, res, next) => {
-    res.json({messagge:"Tournament deleted successfully"});
+    res.sendStatus(204);
 })
 
 router.put('/:id', [updateTournamentById],async(req, res, next) => {
