@@ -44,5 +44,9 @@ router.delete('/:id/round/:round', [deleteRoundById], async (req, res, next) => 
     res.send("Delete a specific round");
 });
 
+//create a tournament round
+router.post('/:id/round/add', [createTournamentRound],async (req, res, next) => {
+    res.json(res.locals.tournament);
+});
 
 module.exports = router;
