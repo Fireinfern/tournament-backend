@@ -1,4 +1,4 @@
-const { createTournament, getAllTournaments } = require("../controllers/tournamentController");
+const { createTournament, getAllTournaments, getTournamentById, updateTournamentById, deleteTournamentById } = require("../controllers/tournamentController");
 const Tournament = require("../models/tournamentModel");
 
 let router = require("express").Router();
@@ -13,16 +13,16 @@ router.post('/add', [createTournament],async (req, res, next) => {
     res.json(res.locals.tournament);
 });
 
-router.get('/:id', (req, res, next) => { //! complete
-    res.send("Find a torunament with an ID");
+router.get('/:id', [getTournamentById],async (req, res, next) => {
+    res.json("Find a tournament with an ID");
 });
 
-router.delete('/:id', (req, res, next) => { //!complete
-    res.send("Delete an specific Entry");
+router.delete('/:id', [deleteTournamentById],async(req, res, next) => {
+    res.json({messagge:"Tournament deleted successfully"});
 })
 
-router.put('/:id', (req, res, next) => {
-    res.send("Putted in here");
+router.put('/:id', [updateTournamentById],async(req, res, next) => {
+    res.json(res.locals.tournament);
 });
 
 router.get('/:id/round/:round', (req, res, next) => {
