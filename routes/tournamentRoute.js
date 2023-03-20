@@ -1,4 +1,4 @@
-const { createTournament, deleteRoundById } = require("../controllers/tournamentController");
+const { createTournament, deleteRoundById, updateRoundById } = require("../controllers/tournamentController");
 const Tournament = require("../models/tournamentModel");
 
 let router = require("express").Router();
@@ -32,6 +32,11 @@ router.get('/:id/round', [getAllRoundsByTournamentId],async (req, res, next) => 
 //get one round of a tournament by Id
 router.get('/:id/round/:round', [getOneRoundFromTournamentById],async (req, res, next) => {
     res.json(res.locals.round);
+});
+
+//update round by Id
+router.put('/:id/round/:round', [updateRoundById], async (req, res, next) => {
+    res.json(res.locals.tournament);
 });
 
 //delete a round in a tournament by Id

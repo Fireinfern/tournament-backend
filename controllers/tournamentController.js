@@ -60,6 +60,7 @@ module.exports.updateRoundById = async (req, res, next) => {
         { _id: tournamentId, 'rounds._id': roundId }, //search keys
         { $set: { 'rounds.$': body } }
     );
+    res.locals.tournament = tournament;
         
     return next();
 }
