@@ -65,7 +65,13 @@ module.exports.updateRoundById = async (req, res, next) => {
 }
 
 module.exports.deleteRoundById = async (req, res, next) => {
+    let tournamentId = req.params.id;
+    let roundId = req.params.round;
 
+    let tournament = await Tournament.findById(id);
+    tournament.rounds.remove(roundId);
+
+    return next();
 }
 
 
