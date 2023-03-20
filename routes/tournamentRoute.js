@@ -1,27 +1,28 @@
-const { createTournament, deleteRoundById, updateRoundById } = require("../controllers/tournamentController");
+const { createTournament, getAllTournaments, getTournamentById, updateTournamentById, deleteTournamentById, deleteRoundById, updateRoundById } = require("../controllers/tournamentController");
 const Tournament = require("../models/tournamentModel");
 
 let router = require("express").Router();
 
 // add Auth if needed
-router.get('', (req, res, next) => {
-    res.send("Return all tournaments");
+router.get('', [getAllTournaments], async(req, res, next) => {
+    res.json(res.locals.tournaments);
 })
 
 router.post('/add', [createTournament],async (req, res, next) => {
+    res.status(201)
     res.json(res.locals.tournament);
 });
 
-router.get('/:id', (req, res, next) => {
-    res.send("Find a torunament with an ID");
+router.get('/:id', [getTournamentById],async (req, res, next) => {
+    res.json(res.locals.tournament);
 });
 
-router.delete('/:id', (req, res, next) => {
-    res.send("Delete an specific Entry");
+router.delete('/:id', [deleteTournamentById],async(req, res, next) => {
+    res.sendStatus(204);
 })
 
-router.put('/:id', (req, res, next) => {
-    res.send("Putted in here");
+router.put('/:id', [updateTournamentById],async(req, res, next) => {
+    res.json(res.locals.tournament);
 });
 
 //get all rounds of a tournament
