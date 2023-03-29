@@ -15,7 +15,7 @@ module.exports.getAllPlayersByTournamentId = async (req, res, next) => {
 }
 
 module.exports.getAllPlayersByRoundId = async (req, res, next) => {
-    let tournamentId = req.params.id;
+    let id = req.params.id;
     let roundId = req.params.round;
 
     let tournament = await Tournament.findById(id);
