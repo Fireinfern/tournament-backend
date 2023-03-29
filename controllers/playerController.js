@@ -4,6 +4,9 @@ module.exports.getAllPlayersByTournamentId = async (req, res, next) => {
     let id = req.params.id;
     let tournament = await Tournament.findById(id);
 
+    if ( !tournament ) {
+        return res.sendStatus(418);
+    }
     //flatMap gets all player subdocuments from all rounds to a single array of players
     let players = tournament.rounds.flatMap(round => round.players);
     
