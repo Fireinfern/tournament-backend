@@ -29,7 +29,7 @@ module.exports.verifyUser = async (req, res, next) => {
     let user = await User.find({ username: body.username, password: body.password });
     if (user.length > 0) {
         res.status(202);
-        const token = jwt.sign({ username: user[0].username }, process.env.SECRET);
+        const token = jwt.sign({ username: user[0].username, id: user[0]._id }, process.env.SECRET);
         res.json({ token });
         return;
     }

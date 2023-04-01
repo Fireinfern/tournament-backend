@@ -34,9 +34,9 @@ let User = userModel.User;
 let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = process.env.SECRET;
-let strategy = new JWTStrategy(jwtOptions,(jwt_payload,done) => {
+let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
   User.findById(jwt_payload.id).then(user => {
-    return done(null,user);
+    return done(null, user);
   }).catch(err => {
     return done(err, false);
   });
@@ -44,7 +44,7 @@ let strategy = new JWTStrategy(jwtOptions,(jwt_payload,done) => {
 passport.use(strategy);
 
 app.get('', (req, res, next) => {
-    res.redirect('/v1/tournaments');
+  res.redirect('/v1/tournaments');
 })
 
 app.use('/v1/tournaments', tournaments);
