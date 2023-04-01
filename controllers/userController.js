@@ -26,10 +26,10 @@ module.exports.verifyUser = async (req, res, next) => {
         return;
     }
     let user = await User.find({ username: body.username, password: body.password });
-    if (user) {
+    if (user.length > 0) {
         res.status(202);
         return next();
     }
-    res.status(400);
+    res.status(401);
     return next();
 }
