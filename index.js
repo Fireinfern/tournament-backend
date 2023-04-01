@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+
 const tournaments = require('./routes/tournamentRoute');
 const users = require('./routes/userRoute');
 
@@ -24,22 +25,15 @@ app.use(express.urlencoded({ extended: false }));
 
 //initialize passport
 app.use(passport.initialize());
-app.use(passport.session());
 
 //create a user model for each user
 let userModel = require('./models/userModel');
 let User = userModel.User;
 
-//passport user configuration
-passport.use(User.createStrategy());
-
-//serialize and deserialize the user info
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = db.Secret;
+jwtOptions.secretOrKey = process.env.SECRET;
 let strategy = new JWTStrategy(jwtOptions,(jwt_payload,done) => {
   User.findById(jwt_payload.id).then(user => {
     return done(null,user);

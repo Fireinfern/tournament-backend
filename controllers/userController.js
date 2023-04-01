@@ -1,4 +1,5 @@
 const { User } = require("../models/userModel");
+const jwt = require("jsonwebtoken");
 
 module.exports.createUser = async (req, res, next) => {
     let body = req.body;
@@ -28,7 +29,9 @@ module.exports.verifyUser = async (req, res, next) => {
     let user = await User.find({ username: body.username, password: body.password });
     if (user.length > 0) {
         res.status(202);
-        return next();
+        const token = jwt.sign({ username: user[0].username }, process.env.SECRET);
+        res.json({ token });
+        return;
     }
     res.status(401);
     return next();
