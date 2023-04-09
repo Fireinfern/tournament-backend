@@ -1,5 +1,5 @@
 const { createTournament, getAllTournaments, getTournamentById, updateTournamentById, deleteTournamentById, deleteRoundById, updateRoundById, createTournamentRound, getAllRoundsByTournamentId, getOneRoundFromTournamentById } = require("../controllers/tournamentController");
-const { getAllPlayersByTournamentId, getAllPlayersByRoundId } = require("../controllers/playerController");
+const { getAllPlayersByTournamentId, getAllPlayersByRoundId, addPlayerByTournamentId, selectWinnerByPlayerId, getTournamentWinnerByTournamentId } = require("../controllers/playerController");
 const passport = require("passport");
 
 let router = require("express").Router();
@@ -60,6 +60,16 @@ router.get('/:id/players', [passport.authenticate('jwt', { session: false }), ge
 //get all players by round id
 router.get('/:id/round/:round/players', [passport.authenticate('jwt', { session: false }), getAllPlayersByRoundId], async (req, res, next) => {
     res.json(res.locals.players);
+});
+
+router.post('/:id/add-player', [passport.authenticate('jwt', { session: false }), addPlayerByTournamentId], async (req, res, next) => {
+    res.json(res.locals.tournament);
+});
+router.post('/:id/rounds/:round/players/:player/select-as-winner', [passport.authenticate('jwt', { session: false }), selectWinnerByPlayerId], async (req, res, next) => {
+    res.json(res.locals.tournament);
+});
+router.get('/:id/get-winner', [passport.authenticate('jwt', { session: false }), getTournamentWinnerByTournamentId], async (req, res, next) => {
+    res.json(res.locals.winner);
 });
 
 module.exports = router;
