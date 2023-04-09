@@ -62,7 +62,7 @@ router.get('/:id/round/:round/players', [passport.authenticate('jwt', { session:
     res.json(res.locals.players);
 });
 
-router.post('/:id/addPlayer', [passport.authenticate('jwt', { session: false }), addPlayerByTournamentId], async (req, res, next) => {
+router.post('/:id/add-player', [passport.authenticate('jwt', { session: false }), addPlayerByTournamentId], async (req, res, next) => {
     res.json(res.locals.tournament);
 });
 router.post('/:id/rounds/:round/players/:player/selectAsWinner', [passport.authenticate('jwt', { session: false }), selectWinnerByPlayerId], async (req, res, next) => {
