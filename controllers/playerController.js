@@ -51,12 +51,6 @@ module.exports.selectWinnerByPlayerId= async (req, res, next) => {
     let player = round.players.id(playerId);
     let players = round.players;
     
-    if(Math.floor(round.players.length/2) == round.winners.length){
-        return res.sendStatus(418);
-    }
-    /*if(!round.winners.find((e) => e._id == player)){
-        return res.sendStatus(418);
-    }*/
     let index = -1;
     round.winners.push(player);
     var filteredRes = rounds.find(function(item, i){
